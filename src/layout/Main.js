@@ -3,10 +3,15 @@ import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import OrderPage from "../pages/OrderPage";
 import SuccessPage from "../pages/SuccessPage";
+import Header from "./Header";
+import PageBody from "./PageBody";
 
 const MainPage = () => {
   return (
     <div>
+      <div>
+        <Header />
+      </div>
       <Switch>
         <Route path="/" exact>
           <HomePage />
@@ -18,10 +23,9 @@ const MainPage = () => {
           <SuccessPage />
         </Route>
       </Switch>
-      <header>
-        <h1>Teknolojik Yemekler</h1>
-        <p>Karnin ac, doyuralim asko</p>
-      </header>
+      <div>
+        <PageBody />
+      </div>
     </div>
   );
 };
