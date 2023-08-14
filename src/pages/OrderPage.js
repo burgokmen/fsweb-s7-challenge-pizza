@@ -1,4 +1,6 @@
 import React from "react";
+import Counter from "../components/Counter";
+import PizzaForm from "../components/PizzaForm";
 
 function OrderPage() {
   return (
@@ -22,6 +24,9 @@ function OrderPage() {
           lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.
         </p>
       </div>
+      <PizzaForm />
+      <hr />
+      <Counter />
     </div>
   );
 }
