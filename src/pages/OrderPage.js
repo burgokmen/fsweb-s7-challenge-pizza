@@ -1,19 +1,24 @@
 import React from "react";
-import Counter from "../components/Counter";
+
 import PizzaForm from "../components/PizzaForm";
 
 function OrderPage() {
   return (
     <div>
+      <br />
+
       <h2> Position Absolute Aci Pizza</h2>
-      <div class="d-flex justify-content-between">
+      <br />
+      <br />
+      <div className="d-flex justify-content-between">
         <p>{/* Toplam Para */}100tl</p>
-        <div class="d-flex">
+        <div className="d-flex">
           <p>4.9</p>
           <p>(200)</p>
         </div>
       </div>
-      <hr />
+
+      <br />
       <div>
         <p>
           Frontent Dev olarak hala position:absolute kullaniyorsan bu cok aci
@@ -25,8 +30,6 @@ function OrderPage() {
         </p>
       </div>
       <PizzaForm />
-      <hr />
-      <Counter />
     </div>
   );
 }
