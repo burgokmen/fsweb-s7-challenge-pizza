@@ -68,7 +68,7 @@ function PizzaForm() {
       <div className="d-flex flex-wrap">
         {ekMalz.map((e, i) => (
           <FormGroup check>
-            <Label htmlFor={e}> {e} </Label>
+            <Label htmlFor={i}> {e} </Label>
             <Input key={i} id={i} type="checkbox" name={e} />
           </FormGroup>
         ))}
