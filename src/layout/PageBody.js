@@ -10,7 +10,7 @@ function PageBody() {
       <Route path="/" exact>
         <HomePage />
       </Route>
-      <Route path="/order" exact>
+      <Route path="/pizza" exact>
         <OrderPage />
       </Route>
       <Route path="/done" exact>

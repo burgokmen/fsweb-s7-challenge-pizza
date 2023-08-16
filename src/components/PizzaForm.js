@@ -1,8 +1,29 @@
 import React from "react";
+
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Counter from "../components/Counter";
 
 const tlSimge = "₺";
+/* const aPizza = {
+  isim: "",
+  boyut: "",
+  Pepperoni: false,
+  Domates: false,
+  Biber: false,
+  Sosis: false,
+  Mısır: false,
+  Sucuk: false,
+  "Kanada Jambonu ": false,
+  "Acı Sos": false,
+  Ananas: false,
+  "Tavuk Izgara": false,
+  Jalepeno: false,
+  Kabak: false,
+  Soğan: false,
+  Sarımsak: false,
+  özel: "",
+}; */
+
 const ekMalz = [
   "Pepperoni",
   "Domates",
@@ -19,10 +40,12 @@ const ekMalz = [
   "Soğan",
   "Sarımsak",
 ];
+/* 
+useEffectle text inputu axiosla yolla bi yere kaydet */
 
 function PizzaForm() {
   return (
-    <Form>
+    <Form id="pizza-form">
       <br />
       <br />
       <br />
@@ -30,7 +53,7 @@ function PizzaForm() {
         <div>
           <FormGroup>
             <h4> Boyut Seç </h4>
-            <FormGroup check>
+            <FormGroup id="size-dropdown" check>
               <Label check>
                 <Input type="radio" name="pizzasize" /> Küçük
               </Label>
@@ -67,9 +90,9 @@ function PizzaForm() {
       <p>En fazla 10 malzeme seçebilirsiniz. 5{tlSimge}</p>
       <div className="d-flex flex-wrap">
         {ekMalz.map((e, i) => (
-          <FormGroup check>
+          <FormGroup key={i} check>
             <Label htmlFor={i}> {e} </Label>
-            <Input key={i} id={i} type="checkbox" name={e} />
+            <Input id={i} type="checkbox" name={e} />
           </FormGroup>
         ))}
       </div>
@@ -79,6 +102,7 @@ function PizzaForm() {
       <h4>Siparis Notu</h4>
       <FormGroup>
         <Input
+          id="special-text"
           placeholder="Siparise eklemek istediginiz birsey var mi?"
           bsSize="lg"
         />

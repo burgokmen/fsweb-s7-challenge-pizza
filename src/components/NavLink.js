@@ -15,13 +15,13 @@ function NavLink1() {
           </li>
           <p> - </p>
           <li>
-            <NavLink to={"/order"}> Seçenekler </NavLink>
+            <NavLink to={"/pizza"}> Seçenekler </NavLink>
           </li>
           <p> - </p>
 
           <li>
             <NavLink
-              to={"/order"}
+              to={"/pizza"}
               style={(isActive) => (isActive ? activeNavLink : null)}
             >
               Siparis Olustur
