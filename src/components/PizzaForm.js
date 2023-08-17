@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Counter from "../components/Counter";
 
 const tlSimge = "₺";
@@ -45,10 +45,22 @@ const ekMalz = [
 useEffectle text inputu axiosla yolla bi yere kaydet */
 
 function PizzaForm() {
-  const [formData, setFormData] = useState({});
+  const [pizzaSize, setPizzaSize] = useState("");
+  const changeHandler = (event) => {
+    setPizzaSize(event.target.value);
+  };
+  const handleSubmit = () => {
+    console.log("pizzaSize");
+  };
 
   return (
-    <Form id="pizza-form">
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log("Siparis Verildi");
+      }}
+      id="pizza-form"
+    >
       <br />
       <br />
       <br />
@@ -125,7 +137,7 @@ function PizzaForm() {
               <p>110 {/* buraya toplam ucreti state gelecek */}</p>
             </div>
           </div>
-          <button> Siparis Ver</button>
+          <Button type="submit"> Siparis Ver</Button>
         </div>
       </div>
     </Form>
