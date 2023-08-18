@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import NavLink1 from "../components/NavLink";
+import tlSimge from "../util";
 
 import PizzaForm from "../components/PizzaForm";
 
@@ -16,7 +17,8 @@ function OrderPage() {
     rating: "4.9",
     reviewnum: "200",
   };
-  
+  const [total, setTotal] = useState(0);
+
   return (
     <div>
       <div className="p-3 navlink11">
@@ -29,8 +31,11 @@ function OrderPage() {
         <br />
         <br />
         <div className="d-flex justify-content-between">
-          <p>{/* Toplam Para */}100tl</p>
-          <div className="d-flex">
+          <p>
+            {total}
+            {tlSimge}
+          </p>
+          <div id="rating" className="d-flex">
             <p>{exampleObj.rating}</p>
             <p>{exampleObj.reviewnum}</p>
           </div>
@@ -40,7 +45,7 @@ function OrderPage() {
         <div>
           <p>{exampleObj.blabla}</p>
         </div>
-        <PizzaForm name={exampleObj.name} />
+        <PizzaForm total={total} setTotal={setTotal} name={exampleObj.name} />
       </div>
     </div>
   );

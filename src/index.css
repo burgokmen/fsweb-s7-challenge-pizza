@@ -50,3 +50,15 @@ a {
 #toplam {
   color: #ce2829;
 }
+
+.homePage {
+  background-color: #ce2829;
+}
+
+.homePage > div > h2 {
+  color: #faf7f2;
+}
+
+#rating > p {
+  padding-left: 3rem;
+}

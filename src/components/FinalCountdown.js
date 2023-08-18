@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "reactstrap";
 import tlSimge from "../util";
 
-function FinalCountdown() {
+function FinalCountdown({ total, toppings }) {
   return (
     <div className="border rounded ">
       <div className="p-3">
@@ -11,13 +11,15 @@ function FinalCountdown() {
           <div className="d-flex justify-content-around">
             <p>Secimler</p>
             <p>
-              25{tlSimge} {/* buraya ek malzeme ucreti state gelecek */}
+              {toppings}
+              {tlSimge}
             </p>
           </div>
           <div id="toplam" className="d-flex justify-content-around">
             <p>Toplam</p>
             <p>
-              110{tlSimge} {/* buraya toplam ucreti state gelecek */}
+              {total}
+              {tlSimge}
             </p>
           </div>
         </div>

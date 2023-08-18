@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "reactstrap";
 import FinalCountdown from "./FinalCountdown";
 
-function Counter({ counter, setCounter }) {
+function Counter({counter, setCounter, total, toppings }) {
   return (
     <div className="d-flex justify-content-around">
       <div className="d-flex align-content-start flex-wrap  ">
@@ -17,12 +17,12 @@ function Counter({ counter, setCounter }) {
         <Button
           className="rounded"
           color="warning"
-          onClick={() => setCounter(Math.min(counter + 1, 6))}
+          onClick={() => setCounter(Math.min(counter + 1))}
         >
           +
         </Button>
       </div>
-      <FinalCountdown />
+      <FinalCountdown total={total} toppings={toppings} />
     </div>
   );
 }

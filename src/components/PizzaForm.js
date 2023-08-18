@@ -6,7 +6,7 @@ import { Form, FormGroup, Label, Input } from "reactstrap";
 import Counter from "./Counter";
 import tlSimge from "../util";
 
-function PizzaForm({ name }) {
+function PizzaForm({ name, total, setTotal }) {
   const toppingsAll = [
     "Pepperoni",
     "Domates",
@@ -43,10 +43,11 @@ function PizzaForm({ name }) {
     Soğan: false,
     Sarımsak: false,
     note: "",
-    quantity: 1,
   };
   const [counter, setCounter] = useState(1);
   const [pizzaOrder, setPizzaOrder] = useState(aPizza);
+ 
+  const [toppings, setToppings] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -160,7 +161,16 @@ function PizzaForm({ name }) {
         />
       </FormGroup>
       <hr />
-      <Counter counter={counter} setCounter={setCounter} />
+      <Counter
+        pizzaOrder={pizzaOrder}
+        setPizzaOrder={setPizzaOrder}
+        aPizza={aPizza}
+        counter={counter}
+        setCounter={setCounter}
+        quantity={aPizza.quantity}
+        total={total}
+        toppings={toppings}
+      />
     </Form>
   );
 }
