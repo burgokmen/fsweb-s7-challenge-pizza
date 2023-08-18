@@ -7,6 +7,7 @@ import Counter from "./Counter";
 import tlSimge from "../util";
 
 function PizzaForm({ name, total, setTotal }) {
+  let sizePrice = 0;
   const toppingsAll = [
     "Pepperoni",
     "Domates",
@@ -46,7 +47,7 @@ function PizzaForm({ name, total, setTotal }) {
   };
   const [counter, setCounter] = useState(1);
   const [pizzaOrder, setPizzaOrder] = useState(aPizza);
- 
+
   const [toppings, setToppings] = useState(0);
 
   const handleSubmit = (e) => {
@@ -59,7 +60,22 @@ function PizzaForm({ name, total, setTotal }) {
 
   useEffect(() => {
     console.log(pizzaOrder);
-  }, [pizzaOrder]);
+
+    let toppingsPrice =
+      Object.values(pizzaOrder).reduce(
+        (a, top) => a + (top === true ? 1 : 0),
+        0
+      ) * 5;
+    if (pizzaOrder.pizzasize === "Büyük") {
+      sizePrice = 90;
+    } else if (pizzaOrder.pizzasize === "Orta") {
+      sizePrice = 70;
+    } else if (pizzaOrder.pizzasize === "Küçük") {
+      sizePrice = 50;
+    }
+    setTotal((sizePrice + toppingsPrice) * counter);
+    setToppings(toppingsPrice);
+  }, [counter, pizzaOrder]);
 
   const changeHandler = (e) => {
     const { name, type, value, checked } = e.target;
