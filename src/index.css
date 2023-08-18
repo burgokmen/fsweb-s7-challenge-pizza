@@ -63,3 +63,12 @@ a {
 #rating > p {
   padding-left: 3rem;
 }
+
+.successPage > h2 {
+  color: #faf7f2;
+  font-family: "Barlow";
+}
+
+.successBody {
+  background-color: #ce2829;
+}

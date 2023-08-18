@@ -75,7 +75,7 @@ function PizzaForm({ name, total, setTotal }) {
     }
     setTotal((sizePrice + toppingsPrice) * counter);
     setToppings(toppingsPrice);
-  }, [counter, pizzaOrder]);
+  }, [counter, pizzaOrder, hizli]);
 
   const changeHandler = (e) => {
     const { name, type, value, checked } = e.target;
