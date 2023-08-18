@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Form, FormGroup, Label, Input } from "reactstrap";
 
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import Counter from "../components/Counter";
+import Counter from "./Counter";
+import tlSimge from "../util";
 
 function PizzaForm({ name }) {
-  const tlSimge = "₺";
-
   const toppingsAll = [
     "Pepperoni",
     "Domates",
@@ -46,7 +45,7 @@ function PizzaForm({ name }) {
     note: "",
     quantity: 1,
   };
-
+  const [counter, setCounter] = useState(1);
   const [pizzaOrder, setPizzaOrder] = useState(aPizza);
 
   const handleSubmit = (e) => {
@@ -77,41 +76,36 @@ function PizzaForm({ name }) {
       <br />
       <div className="d-flex p-2 justify-content-between">
         <div>
-          <FormGroup>
-            <h4> Boyut Seç </h4>
-            <FormGroup id="size-dropdown" check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="pizzasize"
-                  value="Küçük"
-                  onChange={changeHandler}
-                />
-                Küçük
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="pizzasize"
-                  value="Orta"
-                  onChange={changeHandler}
-                />
-                Orta
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input
-                  type="radio"
-                  name="pizzasize"
-                  value="Büyük"
-                  onChange={changeHandler}
-                />
-                Büyük
-              </Label>
-            </FormGroup>
+          <h4> Boyut Seç </h4>
+          <FormGroup className="d-flex flex-column" id="size-dropdown" check>
+            <Label check>
+              <Input
+                type="radio"
+                name="pizzasize"
+                value="Küçük"
+                onChange={changeHandler}
+              />
+              Küçük
+            </Label>
+            <Label check>
+              <Input
+                type="radio"
+                name="pizzasize"
+                value="Orta"
+                onChange={changeHandler}
+              />
+              Orta
+            </Label>
+
+            <Label check>
+              <Input
+                type="radio"
+                name="pizzasize"
+                value="Büyük"
+                onChange={changeHandler}
+              />
+              Büyük
+            </Label>
           </FormGroup>
         </div>
         <div>
@@ -137,10 +131,12 @@ function PizzaForm({ name }) {
       <br />
       <h4> Ek Malzemeler</h4>
       <p>En fazla 10 malzeme seçebilirsiniz. 5{tlSimge}</p>
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap justify-content-between gap-4">
         {toppingsAll.map((tops, i) => (
           <FormGroup key={i} check>
-            <Label htmlFor={i}> {tops} </Label>
+            <Label htmlFor={i} check>
+              {tops}
+            </Label>
             <Input
               id={i}
               type="checkbox"
@@ -164,28 +160,7 @@ function PizzaForm({ name }) {
         />
       </FormGroup>
       <hr />
-      <div>
-        <Counter />
-        <div>
-          <div>
-            <h4>Siparis Toplami</h4>
-            <div>
-              <p>Secimler</p>
-              <p>25tl {/* buraya ek malzeme ucreti state gelecek */}</p>
-            </div>
-            <div>
-              <p>Toplam</p>
-              <p>110 {/* buraya toplam ucreti state gelecek */}</p>
-            </div>
-          </div>
-          <Button
-            type="submit"
-            //disabled={aPizza.pizzasize === "" || aPizza.thickness === ""}
-          >
-            Siparis Ver
-          </Button>
-        </div>
-      </div>
+      <Counter counter={counter} setCounter={setCounter} />
     </Form>
   );
 }

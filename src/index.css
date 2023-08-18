@@ -42,3 +42,11 @@ a {
   color: #faf7f2;
   font-family: "Barlow";
 }
+
+#order-button {
+  min-width: 100%;
+}
+
+#toplam {
+  color: #ce2829;
+}
