@@ -8,6 +8,7 @@ import tlSimge from "../util";
 
 function PizzaForm({ name, total, setTotal }) {
   let sizePrice = 0;
+  const pizzaSizeArr = ["Küçük", "Orta", "Büyük"];
   const toppingsAll = [
     "Pepperoni",
     "Domates",
@@ -75,7 +76,7 @@ function PizzaForm({ name, total, setTotal }) {
     }
     setTotal((sizePrice + toppingsPrice) * counter);
     setToppings(toppingsPrice);
-  }, [counter, pizzaOrder, hizli]);
+  }, [counter, pizzaOrder]);
 
   const changeHandler = (e) => {
     const { name, type, value, checked } = e.target;
@@ -95,34 +96,19 @@ function PizzaForm({ name, total, setTotal }) {
         <div>
           <h4> Boyut Seç </h4>
           <FormGroup className="d-flex flex-column" id="size-dropdown" check>
-            <Label check>
-              <Input
-                type="radio"
-                name="pizzasize"
-                value="Küçük"
-                onChange={changeHandler}
-              />
-              Küçük
-            </Label>
-            <Label check>
-              <Input
-                type="radio"
-                name="pizzasize"
-                value="Orta"
-                onChange={changeHandler}
-              />
-              Orta
-            </Label>
-
-            <Label check>
-              <Input
-                type="radio"
-                name="pizzasize"
-                value="Büyük"
-                onChange={changeHandler}
-              />
-              Büyük
-            </Label>
+            {pizzaSizeArr.map((size, i) => (
+              <div key={i}>
+                <Label check>
+                  <Input
+                    type="radio"
+                    name="pizzasize"
+                    value={size}
+                    onChange={changeHandler}
+                  />
+                  {size}
+                </Label>
+              </div>
+            ))}
           </FormGroup>
         </div>
         <div>
