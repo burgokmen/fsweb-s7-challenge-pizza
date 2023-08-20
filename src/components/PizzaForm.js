@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import { Form, FormGroup, Label, Input, FormFeedback } from "reactstrap";
 import * as Yup from "yup";
 
 import Counter from "./Counter";
@@ -9,8 +9,10 @@ import tlSimge from "../util";
 
 function PizzaForm({ name, total, setTotal }) {
   const formSchema = Yup.object().shape({
-    pizzasize: Yup.string(),
+    pizzasize: Yup.string().required("Pizzanızın boyutunu seçiniz."),
     thickness: Yup.string(),
+    note: Yup.string().max(50, "En fazla 50 karakter girebilirsiniz."),
+    topArr: Yup.array().min(1).max(10).of(Yup.string().required()).required(),
   });
 
   let sizePrices = 0;
@@ -58,6 +60,13 @@ function PizzaForm({ name, total, setTotal }) {
   const [pizzaOrder, setPizzaOrder] = useState(aPizza);
   const [toppings, setToppings] = useState(0);
   const [topArr, setTopArr] = useState([]);
+  const [isFormValid, setFormValid] = useState(false);
+  const [errors, setErrors] = useState({
+    pizzasize: "",
+    thickness: "",
+    note: "",
+    topArr: [],
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,13 +78,22 @@ function PizzaForm({ name, total, setTotal }) {
 
   const changeHandler = (e) => {
     const { name, type, value, checked } = e.target;
-
+    const inputVal = type === "checkbox" ? checked : value;
     setPizzaOrder({
       ...pizzaOrder,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: inputVal,
     });
 
     setTopArr([...topArr, name]);
+    //bu normal istedigim gibi calisiyordu simdi tum obje ogelerinin degisimlerini tutuyor, yuptan soonra oldu bu
+    Yup.reach(formSchema, name)
+      .validate(inputVal)
+      .then((valid) => {
+        setErrors({ ...errors, [name]: "" });
+      })
+      .catch((err) => {
+        setErrors({ ...errors, [name]: err.errors[0] });
+      });
   };
 
   useEffect(() => {
@@ -95,7 +113,12 @@ function PizzaForm({ name, total, setTotal }) {
     setToppings(toppingsPrice * counter);
     setTotal((sizePrice + toppingsPrice) * counter);
     console.log(topArr);
+    formSchema.isValid(pizzaOrder).then((valid) => setFormValid(!valid));
   }, [counter, pizzaOrder, sizePrices, setTotal]);
+
+  useEffect(() => {
+    console.error("Form Valid updated", errors);
+  }, [errors]);
 
   return (
     <Form onSubmit={handleSubmit} id="pizza-form">
@@ -114,11 +137,13 @@ function PizzaForm({ name, total, setTotal }) {
                     name="pizzasize"
                     value={size}
                     onChange={changeHandler}
+                    invalid={!!errors.pizzasize}
                   />
                   {size}
                 </Label>
               </div>
             ))}
+            <FormFeedback>{errors.pizzasize}</FormFeedback>
           </FormGroup>
         </div>
         <div>
@@ -170,7 +195,9 @@ function PizzaForm({ name, total, setTotal }) {
           placeholder="Siparise eklemek istediginiz birsey var mi?"
           bsSize="lg"
           onChange={changeHandler}
+          invalid={!!errors.note}
         />
+        <FormFeedback>{errors.note}</FormFeedback>
       </FormGroup>
       <hr />
       <Counter
@@ -182,6 +209,7 @@ function PizzaForm({ name, total, setTotal }) {
         quantity={aPizza.quantity}
         total={total}
         toppings={toppings}
+        isFormValid={isFormValid}
       />
     </Form>
   );
