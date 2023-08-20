@@ -7,7 +7,7 @@ import Counter from "./Counter";
 import tlSimge from "../util";
 
 function PizzaForm({ name, total, setTotal }) {
-  let sizePrice = 0;
+  let sizePrices = 0;
   const pizzaSizeArr = ["Küçük", "Orta", "Büyük"];
   const toppingsAll = [
     "Pepperoni",
@@ -46,9 +46,9 @@ function PizzaForm({ name, total, setTotal }) {
     Sarımsak: false,
     note: "",
   };
+
   const [counter, setCounter] = useState(1);
   const [pizzaOrder, setPizzaOrder] = useState(aPizza);
-
   const [toppings, setToppings] = useState(0);
 
   const handleSubmit = (e) => {
@@ -59,25 +59,6 @@ function PizzaForm({ name, total, setTotal }) {
       .then((response) => console.log(response.data));
   };
 
-  useEffect(() => {
-    console.log(pizzaOrder);
-
-    let toppingsPrice =
-      Object.values(pizzaOrder).reduce(
-        (a, top) => a + (top === true ? 1 : 0),
-        0
-      ) * 5;
-    if (pizzaOrder.pizzasize === "Büyük") {
-      sizePrice = 90;
-    } else if (pizzaOrder.pizzasize === "Orta") {
-      sizePrice = 70;
-    } else if (pizzaOrder.pizzasize === "Küçük") {
-      sizePrice = 50;
-    }
-    setTotal((sizePrice + toppingsPrice) * counter);
-    setToppings(toppingsPrice);
-  }, [counter, pizzaOrder]);
-
   const changeHandler = (e) => {
     const { name, type, value, checked } = e.target;
 
@@ -86,6 +67,24 @@ function PizzaForm({ name, total, setTotal }) {
       [name]: type === "checkbox" ? checked : value,
     });
   };
+
+  useEffect(() => {
+    console.log(pizzaOrder);
+
+    let toppingsPrice =
+      Object.values(pizzaOrder).reduce(
+        (a, top) => a + (top === true ? 1 : 0),
+        0
+      ) * 5;
+    const sizePrices = {
+      Büyük: 90,
+      Orta: 70,
+      Küçük: 50,
+    };
+    const sizePrice = sizePrices[pizzaOrder.pizzasize] || 0;
+    setToppings(toppingsPrice * counter);
+    setTotal((sizePrice + toppingsPrice) * counter);
+  }, [counter, pizzaOrder, sizePrices, setTotal]);
 
   return (
     <Form onSubmit={handleSubmit} id="pizza-form">
