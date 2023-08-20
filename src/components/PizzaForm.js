@@ -2,11 +2,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, FormGroup, Label, Input } from "reactstrap";
+import * as Yup from "yup";
 
 import Counter from "./Counter";
 import tlSimge from "../util";
 
 function PizzaForm({ name, total, setTotal }) {
+  const formSchema = Yup.object().shape({
+    pizzasize: Yup.string(),
+    thickness: Yup.string(),
+  });
+
   let sizePrices = 0;
   const pizzaSizeArr = ["Küçük", "Orta", "Büyük"];
   const toppingsAll = [
@@ -45,11 +51,13 @@ function PizzaForm({ name, total, setTotal }) {
     Soğan: false,
     Sarımsak: false,
     note: "",
+    topArr: [],
   };
 
   const [counter, setCounter] = useState(1);
   const [pizzaOrder, setPizzaOrder] = useState(aPizza);
   const [toppings, setToppings] = useState(0);
+  const [topArr, setTopArr] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,6 +74,8 @@ function PizzaForm({ name, total, setTotal }) {
       ...pizzaOrder,
       [name]: type === "checkbox" ? checked : value,
     });
+
+    setTopArr([...topArr, name]);
   };
 
   useEffect(() => {
@@ -84,6 +94,7 @@ function PizzaForm({ name, total, setTotal }) {
     const sizePrice = sizePrices[pizzaOrder.pizzasize] || 0;
     setToppings(toppingsPrice * counter);
     setTotal((sizePrice + toppingsPrice) * counter);
+    console.log(topArr);
   }, [counter, pizzaOrder, sizePrices, setTotal]);
 
   return (
