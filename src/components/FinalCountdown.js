@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "reactstrap";
 import tlSimge from "../util";
 
-function FinalCountdown({ total, toppings }) {
+function FinalCountdown({ total, toppings, isFormValid }) {
   return (
     <div className="border rounded ">
       <div className="p-3">
@@ -29,6 +29,8 @@ function FinalCountdown({ total, toppings }) {
         color="warning"
         //disabled={!!aPizza.pizzasize || !!aPizza.thickness}
         id="order-button"
+        disabled={!isFormValid}
+        //yukaridaki disabled calismiyor
       >
         Siparis Ver
       </Button>

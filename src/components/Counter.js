@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "reactstrap";
 import FinalCountdown from "./FinalCountdown";
 
-function Counter({ counter, setCounter, total, toppings }) {
+function Counter({ counter, setCounter, total, toppings, isFormValid }) {
   return (
     <div className="d-flex justify-content-around">
       <div className="d-flex align-content-start flex-wrap  ">
@@ -22,7 +22,11 @@ function Counter({ counter, setCounter, total, toppings }) {
           +
         </Button>
       </div>
-      <FinalCountdown total={total} toppings={toppings} />
+      <FinalCountdown
+        total={total}
+        toppings={toppings}
+        isFormValid={isFormValid}
+      />
     </div>
   );
 }
