@@ -5,7 +5,7 @@ import banner from "../Assets/adv-aseets/adv-form-banner.png";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="order-page">
       <div className="homePage d-flex flex-column align-items-center">
         <div>
           <h2> KOD ACIKTIRIR</h2>
@@ -17,7 +17,11 @@ const HomePage = () => {
           </Link>
         </div>
         <div className="banner-img">
-          <img style={{ transform: "rotate(180deg)" }} src={banner} />
+          <img
+            style={{ transform: "rotate(180deg)" }}
+            alt="pizza"
+            src={banner}
+          />
         </div>
       </div>
     </div>

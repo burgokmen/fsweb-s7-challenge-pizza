@@ -20,7 +20,7 @@ function OrderPage() {
   const [total, setTotal] = useState(0);
 
   return (
-    <div>
+    <div className="order-page">
       <div className="p-3 navlink11">
         <NavLink1 />
       </div>
