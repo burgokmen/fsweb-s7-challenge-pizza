@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import OrderPage from "../pages/OrderPage";
 import SuccessPage from "../pages/SuccessPage";
 
 function PageBody() {
+  const [finalOrder, setFinalOrder] = useState();
   return (
     <Switch>
       <Route path="/" exact>
         <HomePage />
       </Route>
       <Route path="/pizza" exact>
-        <OrderPage />
+        <OrderPage setFinalOrder={setFinalOrder} />
       </Route>
       <Route path="/done" exact>
-        <SuccessPage />
+        <SuccessPage finalOrder={finalOrder} />
       </Route>
     </Switch>
   );

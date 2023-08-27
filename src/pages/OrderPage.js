@@ -4,7 +4,7 @@ import tlSimge from "../util";
 
 import PizzaForm from "../components/PizzaForm";
 
-function OrderPage() {
+function OrderPage({ setFinalOrder }) {
   const exampleObj = {
     name: "Position Absolute Aci Pizza",
     blabla: `Frontent Dev olarak hala position:absolute kullaniyorsan bu cok aci
@@ -45,7 +45,12 @@ function OrderPage() {
         <div>
           <p>{exampleObj.blabla}</p>
         </div>
-        <PizzaForm total={total} setTotal={setTotal} name={exampleObj.name} />
+        <PizzaForm
+          setFinalOrder={setFinalOrder}
+          total={total}
+          setTotal={setTotal}
+          name={exampleObj.name}
+        />
       </div>
     </div>
   );

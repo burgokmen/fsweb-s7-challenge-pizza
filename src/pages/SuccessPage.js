@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-function SuccessPage() {
+function SuccessPage({ finalOrder }) {
+  const history = useHistory();
+  useEffect(() => {
+    if (!finalOrder) {
+      setTimeout(() => {
+        history.push("/");
+      }, 2000);
+    }
+
+    return () => {};
+  }, []);
+
   return (
     <div className="successBody">
       <div className="successPage d-flex flex-column align-items-center">

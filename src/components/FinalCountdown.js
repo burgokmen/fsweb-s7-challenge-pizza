@@ -27,10 +27,8 @@ function FinalCountdown({ total, toppings, isFormValid }) {
       <Button
         type="submit"
         color="warning"
-        //disabled={!!aPizza.pizzasize || !!aPizza.thickness}
         id="order-button"
         disabled={!isFormValid}
-        //yukaridaki disabled calismiyor
       >
         Siparis Ver
       </Button>
