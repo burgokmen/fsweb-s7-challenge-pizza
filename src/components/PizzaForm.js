@@ -38,20 +38,6 @@ function PizzaForm({ name, total, setTotal, setFinalOrder }) {
     name: `${name}`,
     pizzasize: "",
     thickness: "",
-    /* Pepperoni: false,
-    Domates: false,
-    Biber: false,
-    Sosis: false,
-    Mısır: false,
-    Sucuk: false,
-    "Kanada Jambonu ": false,
-    "Acı Sos": false,
-    Ananas: false,
-    "Tavuk Izgara": false,
-    Jalepeno: false,
-    Kabak: false,
-    Soğan: false,
-    Sarımsak: false, */
     tops: [],
     note: "",
   };
@@ -59,14 +45,8 @@ function PizzaForm({ name, total, setTotal, setFinalOrder }) {
   const [counter, setCounter] = useState(1);
   const [pizzaOrder, setPizzaOrder] = useState(aPizza);
   const [toppings, setToppings] = useState(0);
-  //const [topArr, setTopArr] = useState([]);
   const [isFormValid, setFormValid] = useState(false);
-  const [errors, setErrors] = useState({
-    /*  pizzasize: "",
-    thickness: "",
-    note: "", */
-    // topArr: [],
-  });
+  const [errors, setErrors] = useState({});
 
   function validateOrder(formSchema, name, value) {
     Yup.reach(formSchema, name)
@@ -111,9 +91,6 @@ function PizzaForm({ name, total, setTotal, setFinalOrder }) {
       });
       validateOrder(formSchema, name, value);
     }
-
-    //setTopArr([...topArr, name]);
-    //bu normal istedigim gibi calisiyordu simdi tum obje ogelerinin degisimlerini tutuyor, yuptan soonra oldu bu
   };
 
   useEffect(() => {
@@ -128,7 +105,6 @@ function PizzaForm({ name, total, setTotal, setFinalOrder }) {
     const sizePrice = sizePrices[pizzaOrder.pizzasize] || 0;
     setToppings(toppingsPrice * counter);
     setTotal((sizePrice + toppingsPrice) * counter);
-    //console.log(topArr);
     formSchema.isValid(pizzaOrder).then((valid) => setFormValid(valid));
   }, [counter, pizzaOrder, sizePrices, setTotal]);
 
