@@ -6,8 +6,10 @@ import * as Yup from "yup";
 
 import Counter from "./Counter";
 import tlSimge from "../util";
+import { useHistory } from "react-router-dom/";
 
 function PizzaForm({ name, total, setTotal, setFinalOrder }) {
+  const history = useHistory();
   const formSchema = Yup.object().shape({
     pizzasize: Yup.string().required("Pizzanızın boyutunu seçiniz."),
     thickness: Yup.string().required("Pizzanızın kalinligini seçiniz."),
@@ -65,11 +67,13 @@ function PizzaForm({ name, total, setTotal, setFinalOrder }) {
     axios.post("https://reqres.in/api/users", pizzaOrder).then((response) => {
       console.log(response.data);
       setFinalOrder(response.data);
+
+      history.push("/done");
     });
   };
 
   const changeHandler = (e) => {
-    const { name, type, value, ß } = e.target;
+    const { name, type, value } = e.target;
 
     if (type === "checkbox") {
       let newTops = [];
@@ -106,7 +110,7 @@ function PizzaForm({ name, total, setTotal, setFinalOrder }) {
     setToppings(toppingsPrice * counter);
     setTotal((sizePrice + toppingsPrice) * counter);
     formSchema.isValid(pizzaOrder).then((valid) => setFormValid(valid));
-  }, [counter, pizzaOrder, sizePrices, setTotal]);
+  }, [counter, pizzaOrder, sizePrices, setTotal, formSchema]);
 
   return (
     <Form onSubmit={handleSubmit} id="pizza-form">
